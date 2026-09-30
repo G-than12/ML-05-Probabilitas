@@ -4,7 +4,7 @@ Repositori praktikum **Mata Kuliah Pembelajaran Mesin (INF2542)** - Pertemuan 05
 
 ## 📌 Identitas
 - **Nama:** Gathan Hilabi
-- **NIM:** 60324059
+- **NIM:** 059
 - **Mata Kuliah:** INF2542 • Pembelajaran Mesin
 - **Topik:** Probabilitas untuk Machine Learning (Peluang Sederhana, Probabilitas Bersyarat, Teorema Bayes, Simulasi Python & Tugas Mandiri)
 
