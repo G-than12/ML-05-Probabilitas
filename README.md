@@ -116,7 +116,9 @@ Probabilitas mengukur seberapa mungkin suatu kejadian terjadi dalam skala interv
 
 #### Formula Dasar (Frekuensi Relatif):
 
-$$P(A) = \frac{n(A)}{N}$$
+$$
+P(A) = \frac{n(A)}{N}
+$$
 
 Di mana:
 
@@ -126,7 +128,10 @@ Di mana:
 #### Aturan Komplemen (_Complement Rule_):
 
 Jika ruang sampel hanya memiliki dua kemungkinan yang bersifat saling lepas (_mutually exclusive_) dan menyeluruh (_exhaustive_), maka probabilitas komplemen ($A^c$ atau $\neg A$) adalah:
-$$P(A^c) = 1 - P(A) \iff P(A) + P(A^c) = 1$$
+
+$$
+P(A^c) = 1 - P(A) \iff P(A) + P(A^c) = 1
+$$
 
 ---
 
@@ -136,7 +141,9 @@ Probabilitas bersyarat mengukur peluang terjadinya kejadian $A$ **dengan syarat*
 
 #### Formula Matematis:
 
-$$P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \quad \text{asalkan } P(B) > 0$$
+$$
+P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \quad \text{asalkan } P(B) > 0
+$$
 
 Di mana:
 
@@ -146,7 +153,7 @@ Di mana:
 
 > [!NOTE]
 > **Aplikasi Kasus Transaksi Online & Fraud:**
-> Secara umum, peluang transaksi penipuan (_fraud_) mungkin kecil ($15\%$). Namun, jika diketahui transaksi tersebut dilakukan melalui kanal **Online**, peluang penipuan bisa melesat menjadi $40\%$. Informasi tambahan mempersempit ruang sampel dari semesta menjadi hanya subset $B$.
+> Secara umum, peluang transaksi penipuan (_fraud_) mungkin kecil (15%). Namun, jika diketahui transaksi tersebut dilakukan melalui kanal **Online**, peluang penipuan bisa melesat menjadi 40%. Informasi tambahan mempersempit ruang sampel dari semesta menjadi hanya subset $B$.
 
 ---
 
@@ -156,22 +163,28 @@ Teorema Bayes adalah hukum fundamental yang memungkinkan kita **membalik kondisi
 
 #### Formula Matematis:
 
-$$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}$$
+$$
+P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}
+$$
 
 #### Anatomi 4 Pilar Teorema Bayes:
 
-| Komponen       | Notasi        | Penjelasan Konseptual                                        | Contoh Kasus Deteksi Fraud                                      |
-| -------------- | ------------- | ------------------------------------------------------------ | --------------------------------------------------------------- |
-| **Prior**      | $P(A)$        | Keyakinan awal terhadap hipotesis sebelum melihat bukti baru | Peluang awal transaksi adalah fraud ($15\%$)                    |
-| **Likelihood** | $P(B \mid A)$ | Peluang munculnya bukti jika hipotesis benar                 | Peluang transaksi online jika itu memang fraud ($80\%$)         |
-| **Evidence**   | $P(B)$        | Total probabilitas kemunculan bukti pada seluruh kemungkinan | Peluang transaksi dilakukan secara online ($30\%$)              |
-| **Posterior**  | $P(A \mid B)$ | Keyakinan yang diperbarui setelah memperhitungkan bukti      | Peluang transaksi adalah fraud setelah tahu dia online ($40\%$) |
+| Komponen       | Notasi        | Penjelasan Konseptual                                        | Contoh Kasus Deteksi Fraud                                  |
+| -------------- | ------------- | ------------------------------------------------------------ | ----------------------------------------------------------- |
+| **Prior**      | $P(A)$        | Keyakinan awal terhadap hipotesis sebelum melihat bukti baru | Peluang awal transaksi adalah fraud (15%)                   |
+| **Likelihood** | $P(B \mid A)$ | Peluang munculnya bukti jika hipotesis benar                 | Peluang transaksi online jika itu memang fraud (80%)        |
+| **Evidence**   | $P(B)$        | Total probabilitas kemunculan bukti pada seluruh kemungkinan | Peluang transaksi dilakukan secara online (30%)             |
+| **Posterior**  | $P(A \mid B)$ | Keyakinan yang diperbarui setelah memperhitungkan bukti      | Peluang transaksi adalah fraud setelah tahu dia online (40%) |
 
-> [!IMPORTANT]
-> **Relevansi ke Algoritma Naive Bayes Classifier:**
-> Pada klasifikasi teks (seperti filter spam email), Naive Bayes menghitung:
-> $$P(\text{Spam} \mid \text{Kata}_1, \text{Kata}_2, \dots, \text{Kata}_n) \propto P(\text{Spam}) \prod_{i=1}^n P(\text{Kata}_i \mid \text{Spam})$$
-> Model mengasumsikan independensi kondisional antar-fitur untuk memprediksi probabilitas kelas target.
+#### 📌 Relevansi ke Algoritma Naive Bayes Classifier
+
+Pada klasifikasi teks (seperti filter spam email), algoritma Naive Bayes menghitung peluang posterior kelas target menggunakan asumsi independensi fitur:
+
+$$
+P(\text{Spam} \mid \text{Kata}_1, \text{Kata}_2, \dots, \text{Kata}_n) \propto P(\text{Spam}) \prod_{i=1}^n P(\text{Kata}_i \mid \text{Spam})
+$$
+
+Model mengasumsikan independensi kondisional antar-fitur agar komputasi peluang kelas target dapat dilakukan dengan sangat cepat dan efisien.
 
 ---
 
@@ -179,8 +192,11 @@ $$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}$$
 
 Dalam kenyataannya, banyak ruang masalah yang terlalu kompleks untuk dihitung secara analitis tertutup. **Metode Monte Carlo** menggunakan komputasi acak berulang (_pseudorandom sampling_) untuk mengestimasi parameter matematis.
 
-Berdasarkan **Hukum Bilangan Besar (_Law of Large Numbers_ - LLN)**:
-$$\lim_{N \to \infty} \hat{P}_N(A) = P(A)$$
+Berupa **Hukum Bilangan Besar (_Law of Large Numbers_ - LLN)**:
+
+$$
+\lim_{N \to \infty} \hat{P}_N(A) = P(A)
+$$
 
 Seiring bertambahnya jumlah eksperimen ($N \to \infty$), rata-rata frekuensi empiris akan konvergen mendekati nilai probabilitas teoretis yang sebenarnya, sementara variansi kesalahan (_sampling error_) mengecil dengan laju proporsional $\mathcal{O}\left(\frac{1}{\sqrt{N}}\right)$.
 
@@ -219,7 +235,7 @@ print("P(Lulus)    :", p_lulus)
 1. `data == "Lulus"` menghasilkan array boolean NumPy: `[True, True, False, True, False, True, True, True, False, True]`.
 2. `np.sum(...)` menjumlahkan nilai boolean tersebut (`True` dihitung 1, `False` dihitung 0), menghasilkan nilai integer `7`.
 3. Menghitung rasio $7 / 10 = 0.70$.
-4. **Hasil Output:** $P(\text{Lulus}) = 0.70$ (atau $70\%$).
+4. **Hasil Output:** $P(\text{Lulus}) = 0.70$ (atau 70%).
 
 ---
 
@@ -242,7 +258,7 @@ print("P(Fraud | Online)               =", p_fraud_given_online)
 
 1. Mengisolasi ruang sampel hanya pada transaksi yang bersifat _Online_ (`total_online = 30`).
 2. Menghitung proporsi kejadian _Fraud_ di dalam ruang sampel tersaring tersebut (`fraud_online = 12`).
-3. **Hasil Output:** $P(\text{Fraud} \mid \text{Online}) = \frac{12}{30} = 0.40$ ($40\%$). Informasi kondisi _Online_ menaikkan risiko fraud dari $15\%$ menjadi $40\%$.
+3. **Hasil Output:** $P(\text{Fraud} \mid \text{Online}) = \frac{12}{30} = 0.40$ (40%). Informasi kondisi _Online_ menaikkan risiko fraud dari 15% menjadi 40%.
 
 ---
 
@@ -384,11 +400,11 @@ p_posterior_bayes = (p_likelihood * p_prior_tinggi) / p_evidence
 # Hasil: (1.00 * 0.60) / 0.65 = 0.9231 (92.3%)
 ```
 
-> **Kesimpulan:** $92.3\%$ mahasiswa yang lulus berasal dari kelompok yang disiplin hadir $\ge 80\%$.
+> **Kesimpulan:** 92.3% mahasiswa yang lulus berasal dari kelompok yang disiplin hadir ≥ 80%.
 
 #### 2. Probabilitas Bersyarat Multikondisi
 
-Mengevaluasi irisan dua syarat: $\text{Kehadiran} \ge 80\%$ **DAN** $\text{Nilai Tugas} \ge 80$.
+Mengevaluasi irisan dua syarat: **Kehadiran ≥ 80%** dan **Nilai Tugas ≥ 80**.
 
 ```python
 kondisi_prima = (df_mhs["Kehadiran (%)"] >= 80) & (df_mhs["Nilai_Tugas"] >= 80)
@@ -398,7 +414,7 @@ p_lulus_non_multi = np.mean(df_mhs[~kondisi_prima]["Status"] == "Lulus")   # 22.
 
 #### 3. Bootstrap Monte Carlo Resampling (1.000 Iterasi)
 
-Menggunakan teknik _bootstrapping with replacement_ untuk mengukur ketahanan statistik (_robustness_) dan interval kepercayaan $95\%$:
+Menggunakan teknik _bootstrapping with replacement_ untuk mengukur ketahanan statistik (_robustness_) dan interval kepercayaan 95%:
 
 ```python
 boot_p_lulus = []
@@ -418,9 +434,8 @@ ci_lulus_tinggi = np.percentile(boot_p_lulus_given_tinggi, [2.5, 97.5])
 ```
 
 > **Hasil 95% Confidence Interval:**
->
-> - $P(\text{Lulus})$: $[45.0\%, 85.0\%]$
-> - $P(\text{Lulus} \mid \text{Kehadiran} \ge 80\%)$: $[100.0\%, 100.0\%]$ (Sangat stabil di $1.00$).
+> - $P(\text{Lulus})$: 45.0% - 85.0%
+> - $P(\text{Lulus} \mid \text{Kehadiran Tinggi})$: 100.0% (Sangat stabil di 1.00).
 
 ---
 
@@ -432,9 +447,9 @@ Notebook menyajikan 3 visualisasi utama yang disajikan secara terpisah untuk kem
 
 Membandingkan baseline probabilitas kelulusan terhadap dua sub-populasi:
 
-- **Baseline $P(\text{Lulus})$**: $65.0\%$
-- **Kehadiran Tinggi ($\ge 80\%$)**: **$100.0\%$**
-- **Kehadiran Rendah ($< 80\%$)**: **$12.5\%$**
+- **Baseline $P(\text{Lulus})$**: 65.0%
+- **Kehadiran Tinggi (≥ 80%)**: **100.0%**
+- **Kehadiran Rendah (< 80%)**: **12.5%**
 
 ```
 Probabilitas Kelulusan Berdasarkan Kondisi Kehadiran:
@@ -447,23 +462,23 @@ Probabilitas Kelulusan Berdasarkan Kondisi Kehadiran:
 
 Memetakan dinamika trade-off antara **ketelitian probabilitas kelulusan** vs **jumlah populasi mahasiswa yang terjaring**:
 
-| Ambang Kehadiran | Jumlah Mahasiswa | Jumlah Lulus | $P(\text{Lulus} \mid \text{Kehadiran} \ge T)$ |    Status Kelulusan     |
-| :--------------: | :--------------: | :----------: | :-------------------------------------------: | :---------------------: |
-|  **$\ge 65\%$**  |   17 mahasiswa   |   13 orang   |            **$0.7647$** ($76.5\%$)            |       Belum murni       |
-|  **$\ge 70\%$**  |   15 mahasiswa   |   13 orang   |            **$0.8667$** ($86.7\%$)            |     Meningkat pesat     |
-|  **$\ge 75\%$**  |   13 mahasiswa   |   13 orang   |           **$1.0000$** ($100.0\%$)            | **Titik Jenuh Optimal** |
-|  **$\ge 80\%$**  |   12 mahasiswa   |   12 orang   |           **$1.0000$** ($100.0\%$)            |    Standar Akademik     |
-|  **$\ge 85\%$**  |   10 mahasiswa   |   10 orang   |           **$1.0000$** ($100.0\%$)            |     Sangat selektif     |
-|  **$\ge 90\%$**  |   6 mahasiswa    |   6 orang    |           **$1.0000$** ($100.0\%$)            |    Populasi menyusut    |
+| Ambang Kehadiran | Jumlah Mahasiswa | Jumlah Lulus | P(Lulus \| Kehadiran ≥ T) |    Status Kelulusan     |
+| :--------------: | :--------------: | :----------: | :-----------------------: | :---------------------: |
+|    **≥ 65%**     |   17 mahasiswa   |   13 orang   |    **0.7647** (76.5%)     |       Belum murni       |
+|    **≥ 70%**     |   15 mahasiswa   |   13 orang   |    **0.8667** (86.7%)     |     Meningkat pesat     |
+|    **≥ 75%**     |   13 mahasiswa   |   13 orang   |   **1.0000** (100.0%)     | **Titik Jenuh Optimal** |
+|    **≥ 80%**     |   12 mahasiswa   |   12 orang   |   **1.0000** (100.0%)     |    Standar Akademik     |
+|    **≥ 85%**     |   10 mahasiswa   |   10 orang   |   **1.0000** (100.0%)     |     Sangat selektif     |
+|    **≥ 90%**     |   6 mahasiswa    |   6 orang    |   **1.0000** (100.0%)     |    Populasi menyusut    |
 
 > [!TIP]
-> **Insight Batas Ambang:** Titik batas $\ge 75\%$ hingga $\ge 80\%$ merupakan _optimal decision threshold_. Di atas batas ini, model klasifikasi mencapai akurasi presisi $100\%$ tanpa memangkas ukuran sampel secara berlebihan.
+> **Insight Batas Ambang:** Titik batas 75% hingga 80% merupakan _optimal decision threshold_. Di atas batas ini, model klasifikasi mencapai akurasi presisi 100% tanpa memangkas ukuran sampel secara berlebihan.
 
 ### 3. Scatter Plot Sebaran Kehadiran vs Nilai Akhir
 
-- Sumbu X: Persentase Kehadiran ($0 - 100\%$).
-- Sumbu Y: Nilai Akhir Mahasiswa ($0 - 100$).
-- Garis Referensi: Garis ambang kehadiran ($80\%$) dan batas kelulusan ($70.0$).
+- Sumbu X: Persentase Kehadiran (0 - 100%).
+- Sumbu Y: Nilai Akhir Mahasiswa (0 - 100).
+- Garis Referensi: Garis ambang kehadiran (80%) dan batas kelulusan (70.0).
 - **Interpretasi:** Terlihat pola pemisahan linier (_linear separability_) yang sangat bersih. Kuadran kanan atas diduduki seluruhnya oleh titik hijau (**Lulus**), membuktikan fitur kehadiran memiliki _mutual information_ yang sangat tinggi terhadap label target.
 
 ---
@@ -519,8 +534,8 @@ ML-05-Probabilitas/
 
 ## 💡 Ringkasan Temuan Kunci (_Key Takeaways_)
 
-1. **Kehadiran sebagai Prediktor Kuat**: Kehadiran $\ge 80\%$ melipatgandakan kepastian kelulusan mahasiswa dari baseline $65\%$ menjadi $100\%$.
-2. **Kekuatan Teorema Bayes**: Bayes membuktikan bahwa $92.3\%$ mahasiswa yang lulus memiliki catatan kehadiran tinggi, memberikan dasar matematis untuk _early warning system_ akademik.
+1. **Kehadiran sebagai Prediktor Kuat**: Kehadiran ≥ 80% melipatgandakan kepastian kelulusan mahasiswa dari baseline 65% menjadi 100%.
+2. **Kekuatan Teorema Bayes**: Bayes membuktikan bahwa 92.3% mahasiswa yang lulus memiliki catatan kehadiran tinggi, memberikan dasar matematis untuk _early warning system_ akademik.
 3. **Konvergensi LLN**: Simulasi Monte Carlo memvalidasi bahwa hukum bilangan besar menjamin akurasi estimasi model seiring dengan pertambahan volume data latih.
 
 ---
