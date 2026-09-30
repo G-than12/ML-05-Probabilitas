@@ -1,6 +1,7 @@
 <div align="center">
 
 # 🧠 ML-05: Teori Probabilitas untuk Machine Learning
+
 ### Mata Kuliah: INF2542 • Pembelajaran Mesin | Praktikum Modul 05
 
 [![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
@@ -38,7 +39,7 @@
   </tr>
   <tr>
     <td><b>Nomor Induk Mahasiswa (NIM)</b></td>
-    <td>: <b>60324059</b></td>
+    <td>: <b>059</b></td>
   </tr>
   <tr>
     <td><b>Mata Kuliah</b></td>
@@ -62,12 +63,13 @@
 
 ## 📖 Pendahuluan & Filosofi: Probabilitas dalam Machine Learning
 
-Dalam dunia nyata, data tidak pernah bersifat deterministik sempurna; data selalu mengandung derau (*noise*), ketidakpastian (*uncertainty*), serta observasi yang tidak lengkap. Oleh karena itu, **Machine Learning pada hakikatnya adalah seni penalaran di bawah ketidakpastian** (*reasoning under uncertainty*).
+Dalam dunia nyata, data tidak pernah bersifat deterministik sempurna; data selalu mengandung derau (_noise_), ketidakpastian (_uncertainty_), serta observasi yang tidak lengkap. Oleh karena itu, **Machine Learning pada hakikatnya adalah seni penalaran di bawah ketidakpastian** (_reasoning under uncertainty_).
 
 Probabilitas bukan sekadar alat hitung frekuensi, melainkan bahasa formal yang digunakan algoritma untuk:
+
 1. **Membuat Prediksi Terkalibrasi**: Model klasifikasi tidak hanya mengeluarkan label kelas diskrit, melainkan nilai kepercayaan seperti $P(y = \text{Fraud} \mid X) = 0.94$.
-2. **Mengoptimalkan Fungsi Objektif (*Loss Function*)**: Fungsi *Binary Cross-Entropy* (Log-Loss) diturunkan secara langsung dari prinsip *Maximum Likelihood Estimation* (MLE) berbasis probabilitas.
-3. **Memperbarui Pengetahuan Melalui Pengalaman**: Seperti pada *Bayesian Inference*, prior pengetahuan digabungkan dengan bukti baru dari data untuk menghasilkan posterior yang optimal.
+2. **Mengoptimalkan Fungsi Objektif (_Loss Function_)**: Fungsi _Binary Cross-Entropy_ (Log-Loss) diturunkan secara langsung dari prinsip _Maximum Likelihood Estimation_ (MLE) berbasis probabilitas.
+3. **Memperbarui Pengetahuan Melalui Pengalaman**: Seperti pada _Bayesian Inference_, prior pengetahuan digabungkan dengan bukti baru dari data untuk menghasilkan posterior yang optimal.
 
 Repositori ini menyajikan implementasi komputasional dari setiap pilar probabilitas tersebut menggunakan Python, mulai dari konsep dasar hingga simulasi tingkat lanjut.
 
@@ -108,54 +110,62 @@ Berikut adalah penjelasan konsep teoretis dan formulasi matematis yang dipelajar
 ### 1. Probabilitas Sederhana & Aturan Komplemen
 
 Probabilitas mengukur seberapa mungkin suatu kejadian terjadi dalam skala interval kontinu $[0, 1]$:
+
 - $P(A) = 0$: Kejadian mustahil terjadi.
 - $P(A) = 1$: Kejadian pasti terjadi.
 
 #### Formula Dasar (Frekuensi Relatif):
+
 $$P(A) = \frac{n(A)}{N}$$
 
 Di mana:
+
 - $n(A)$ = Jumlah kejadian yang memenuhi kriteria $A$.
 - $N$ = Ukuran ruang sampel semesta ($S$).
 
-#### Aturan Komplemen (*Complement Rule*):
-Jika ruang sampel hanya memiliki dua kemungkinan yang bersifat saling lepas (*mutually exclusive*) dan menyeluruh (*exhaustive*), maka probabilitas komplemen ($A^c$ atau $\neg A$) adalah:
+#### Aturan Komplemen (_Complement Rule_):
+
+Jika ruang sampel hanya memiliki dua kemungkinan yang bersifat saling lepas (_mutually exclusive_) dan menyeluruh (_exhaustive_), maka probabilitas komplemen ($A^c$ atau $\neg A$) adalah:
 $$P(A^c) = 1 - P(A) \iff P(A) + P(A^c) = 1$$
 
 ---
 
-### 2. Probabilitas Bersyarat (*Conditional Probability*)
+### 2. Probabilitas Bersyarat (_Conditional Probability_)
 
 Probabilitas bersyarat mengukur peluang terjadinya kejadian $A$ **dengan syarat** kejadian $B$ sudah diketahui telah terjadi.
 
 #### Formula Matematis:
+
 $$P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \quad \text{asalkan } P(B) > 0$$
 
 Di mana:
+
 - $P(A \mid B)$ : Peluang bersyarat terjadinya $A$ jika $B$ terjadi.
-- $P(A \cap B)$ : Peluang terjadinya kedua peristiwa $A$ dan $B$ secara bersamaan (*joint probability*).
+- $P(A \cap B)$ : Peluang terjadinya kedua peristiwa $A$ dan $B$ secara bersamaan (_joint probability_).
 - $P(B)$ : Probabilitas marginal peristiwa syarat $B$.
 
 > [!NOTE]
 > **Aplikasi Kasus Transaksi Online & Fraud:**
-> Secara umum, peluang transaksi penipuan (*fraud*) mungkin kecil ($15\%$). Namun, jika diketahui transaksi tersebut dilakukan melalui kanal **Online**, peluang penipuan bisa melesat menjadi $40\%$. Informasi tambahan mempersempit ruang sampel dari semesta menjadi hanya subset $B$.
+> Secara umum, peluang transaksi penipuan (_fraud_) mungkin kecil ($15\%$). Namun, jika diketahui transaksi tersebut dilakukan melalui kanal **Online**, peluang penipuan bisa melesat menjadi $40\%$. Informasi tambahan mempersempit ruang sampel dari semesta menjadi hanya subset $B$.
 
 ---
 
-### 3. Teorema Bayes (*Bayes' Theorem*)
+### 3. Teorema Bayes (_Bayes' Theorem_)
 
 Teorema Bayes adalah hukum fundamental yang memungkinkan kita **membalik kondisi bersyarat**: menghitung $P(A \mid B)$ dari pengetahuan tentang $P(B \mid A)$, $P(A)$, dan $P(B)$.
 
 #### Formula Matematis:
+
 $$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}$$
 
 #### Anatomi 4 Pilar Teorema Bayes:
-| Komponen | Notasi | Penjelasan Konseptual | Contoh Kasus Deteksi Fraud |
-|---|---|---|---|
-| **Prior** | $P(A)$ | Keyakinan awal terhadap hipotesis sebelum melihat bukti baru | Peluang awal transaksi adalah fraud ($15\%$) |
-| **Likelihood** | $P(B \mid A)$ | Peluang munculnya bukti jika hipotesis benar | Peluang transaksi online jika itu memang fraud ($80\%$) |
-| **Evidence** | $P(B)$ | Total probabilitas kemunculan bukti pada seluruh kemungkinan | Peluang transaksi dilakukan secara online ($30\%$) |
-| **Posterior** | $P(A \mid B)$ | Keyakinan yang diperbarui setelah memperhitungkan bukti | Peluang transaksi adalah fraud setelah tahu dia online ($40\%$) |
+
+| Komponen       | Notasi        | Penjelasan Konseptual                                        | Contoh Kasus Deteksi Fraud                                      |
+| -------------- | ------------- | ------------------------------------------------------------ | --------------------------------------------------------------- |
+| **Prior**      | $P(A)$        | Keyakinan awal terhadap hipotesis sebelum melihat bukti baru | Peluang awal transaksi adalah fraud ($15\%$)                    |
+| **Likelihood** | $P(B \mid A)$ | Peluang munculnya bukti jika hipotesis benar                 | Peluang transaksi online jika itu memang fraud ($80\%$)         |
+| **Evidence**   | $P(B)$        | Total probabilitas kemunculan bukti pada seluruh kemungkinan | Peluang transaksi dilakukan secara online ($30\%$)              |
+| **Posterior**  | $P(A \mid B)$ | Keyakinan yang diperbarui setelah memperhitungkan bukti      | Peluang transaksi adalah fraud setelah tahu dia online ($40\%$) |
 
 > [!IMPORTANT]
 > **Relevansi ke Algoritma Naive Bayes Classifier:**
@@ -165,14 +175,14 @@ $$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}$$
 
 ---
 
-### 4. Simulasi Monte Carlo & Hukum Bilangan Besar (*Law of Large Numbers*)
+### 4. Simulasi Monte Carlo & Hukum Bilangan Besar (_Law of Large Numbers_)
 
-Dalam kenyataannya, banyak ruang masalah yang terlalu kompleks untuk dihitung secara analitis tertutup. **Metode Monte Carlo** menggunakan komputasi acak berulang (*pseudorandom sampling*) untuk mengestimasi parameter matematis.
+Dalam kenyataannya, banyak ruang masalah yang terlalu kompleks untuk dihitung secara analitis tertutup. **Metode Monte Carlo** menggunakan komputasi acak berulang (_pseudorandom sampling_) untuk mengestimasi parameter matematis.
 
-Berdasarkan **Hukum Bilangan Besar (*Law of Large Numbers* - LLN)**:
+Berdasarkan **Hukum Bilangan Besar (_Law of Large Numbers_ - LLN)**:
 $$\lim_{N \to \infty} \hat{P}_N(A) = P(A)$$
 
-Seiring bertambahnya jumlah eksperimen ($N \to \infty$), rata-rata frekuensi empiris akan konvergen mendekati nilai probabilitas teoretis yang sebenarnya, sementara variansi kesalahan (*sampling error*) mengecil dengan laju proporsional $\mathcal{O}\left(\frac{1}{\sqrt{N}}\right)$.
+Seiring bertambahnya jumlah eksperimen ($N \to \infty$), rata-rata frekuensi empiris akan konvergen mendekati nilai probabilitas teoretis yang sebenarnya, sementara variansi kesalahan (_sampling error_) mengecil dengan laju proporsional $\mathcal{O}\left(\frac{1}{\sqrt{N}}\right)$.
 
 ---
 
@@ -205,6 +215,7 @@ print("P(Lulus)    :", p_lulus)
 ```
 
 **🔍 Cara Kerja Kode:**
+
 1. `data == "Lulus"` menghasilkan array boolean NumPy: `[True, True, False, True, False, True, True, True, False, True]`.
 2. `np.sum(...)` menjumlahkan nilai boolean tersebut (`True` dihitung 1, `False` dihitung 0), menghasilkan nilai integer `7`.
 3. Menghitung rasio $7 / 10 = 0.70$.
@@ -228,9 +239,10 @@ print("P(Fraud | Online)               =", p_fraud_given_online)
 ```
 
 **🔍 Cara Kerja Kode:**
-1. Mengisolasi ruang sampel hanya pada transaksi yang bersifat *Online* (`total_online = 30`).
-2. Menghitung proporsi kejadian *Fraud* di dalam ruang sampel tersaring tersebut (`fraud_online = 12`).
-3. **Hasil Output:** $P(\text{Fraud} \mid \text{Online}) = \frac{12}{30} = 0.40$ ($40\%$). Informasi kondisi *Online* menaikkan risiko fraud dari $15\%$ menjadi $40\%$.
+
+1. Mengisolasi ruang sampel hanya pada transaksi yang bersifat _Online_ (`total_online = 30`).
+2. Menghitung proporsi kejadian _Fraud_ di dalam ruang sampel tersaring tersebut (`fraud_online = 12`).
+3. **Hasil Output:** $P(\text{Fraud} \mid \text{Online}) = \frac{12}{30} = 0.40$ ($40\%$). Informasi kondisi _Online_ menaikkan risiko fraud dari $15\%$ menjadi $40\%$.
 
 ---
 
@@ -250,8 +262,9 @@ print("Posterior P(Fraud | Online) =", round(p_fraud_given_online, 3))
 ```
 
 **🔍 Cara Kerja Kode:**
-1. Kode mengalikan *Likelihood* ($0.80$) dengan *Prior* ($0.15$), yang menghasilkan peluang bersama $P(\text{Online} \cap \text{Fraud}) = 0.12$.
-2. Peluang bersama kemudian dinormalisasi dengan membaginya terhadap *Evidence* ($0.30$).
+
+1. Kode mengalikan _Likelihood_ ($0.80$) dengan _Prior_ ($0.15$), yang menghasilkan peluang bersama $P(\text{Online} \cap \text{Fraud}) = 0.12$.
+2. Peluang bersama kemudian dinormalisasi dengan membaginya terhadap _Evidence_ ($0.30$).
 3. **Hasil Output:** $\frac{0.12}{0.30} = 0.40$. Terbukti identik dengan perhitungan bersyarat langsung pada Bagian 2.
 
 ---
@@ -276,6 +289,7 @@ for n in n_values:
 ```
 
 **🔍 Cara Kerja Kode:**
+
 1. `np.random.randint(1, 7, size=n)` melempar dadu virtual $6$-sisi sebanyak $n$ kali.
 2. `h % 2 == 0` mengecek angka genap ($2, 4, 6$).
 3. `np.mean(...)` menghitung frekuensi relatif kemunculan sisi genap.
@@ -290,6 +304,7 @@ for n in n_values:
 Pada Tugas Mandiri (Slide 21), dibangun sebuah pipeline analitis lengkap berbasis `pandas`:
 
 #### 1. Pembentukan Dataset & Perhitungan Nilai Akhir
+
 ```python
 import numpy as np
 import pandas as pd
@@ -313,8 +328,8 @@ df_mhs = pd.DataFrame(data_mahasiswa)
 
 # Bobot penilaian: 30% Kehadiran + 30% Tugas + 40% Ujian
 df_mhs["Nilai_Akhir"] = (
-    0.30 * df_mhs["Kehadiran (%)"] + 
-    0.30 * df_mhs["Nilai_Tugas"] + 
+    0.30 * df_mhs["Kehadiran (%)"] +
+    0.30 * df_mhs["Nilai_Tugas"] +
     0.40 * df_mhs["Nilai_Ujian"]
 ).round(1)
 
@@ -323,6 +338,7 @@ df_mhs["Status"] = np.where(df_mhs["Nilai_Akhir"] >= 70.0, "Lulus", "Tidak Lulus
 ```
 
 #### 2. Peluang Sederhana & Probabilitas Bersyarat
+
 ```python
 # Peluang Dasar P(Lulus)
 p_lulus = np.mean(df_mhs["Status"] == "Lulus")   # Hasil: 13 / 20 = 0.6500 (65%)
@@ -337,6 +353,7 @@ p_lulus_given_rendah = np.mean(df_rendah["Status"] == "Lulus")  # Hasil: 1 / 8 =
 ```
 
 #### 3. Sensitivity Analysis (Variasi Batas Ambang Kehadiran)
+
 ```python
 ambang_batas = [65, 70, 75, 80, 85, 90]
 hasil_sensitivitas = []
@@ -354,7 +371,9 @@ for t in ambang_batas:
 Untuk memperdalam analisis, dirancang 3 eksperimen lanjutan:
 
 #### 1. Inversi Teorema Bayes: $P(\text{Kehadiran Tinggi} \mid \text{Lulus})$
+
 Ingin dicari: Jika seorang mahasiswa dinyatakan **Lulus**, berapa peluang dia memiliki kehadiran tinggi?
+
 ```python
 p_prior_tinggi = np.mean(df_mhs["Kehadiran (%)"] >= 80)     # P(Tinggi) = 12/20 = 0.60
 p_likelihood   = p_lulus_given_tinggi                        # P(Lulus | Tinggi) = 1.00
@@ -364,10 +383,13 @@ p_evidence     = p_lulus                                     # P(Lulus) = 0.65
 p_posterior_bayes = (p_likelihood * p_prior_tinggi) / p_evidence
 # Hasil: (1.00 * 0.60) / 0.65 = 0.9231 (92.3%)
 ```
+
 > **Kesimpulan:** $92.3\%$ mahasiswa yang lulus berasal dari kelompok yang disiplin hadir $\ge 80\%$.
 
 #### 2. Probabilitas Bersyarat Multikondisi
+
 Mengevaluasi irisan dua syarat: $\text{Kehadiran} \ge 80\%$ **DAN** $\text{Nilai Tugas} \ge 80$.
+
 ```python
 kondisi_prima = (df_mhs["Kehadiran (%)"] >= 80) & (df_mhs["Nilai_Tugas"] >= 80)
 p_lulus_multi = np.mean(df_mhs[kondisi_prima]["Status"] == "Lulus")       # 100% (11/11 mhs)
@@ -375,7 +397,9 @@ p_lulus_non_multi = np.mean(df_mhs[~kondisi_prima]["Status"] == "Lulus")   # 22.
 ```
 
 #### 3. Bootstrap Monte Carlo Resampling (1.000 Iterasi)
-Menggunakan teknik *bootstrapping with replacement* untuk mengukur ketahanan statistik (*robustness*) dan interval kepercayaan $95\%$:
+
+Menggunakan teknik _bootstrapping with replacement_ untuk mengukur ketahanan statistik (_robustness_) dan interval kepercayaan $95\%$:
+
 ```python
 boot_p_lulus = []
 boot_p_lulus_given_tinggi = []
@@ -383,7 +407,7 @@ boot_p_lulus_given_tinggi = []
 for _ in range(1000):
     sample = df_mhs.sample(n=len(df_mhs), replace=True)
     boot_p_lulus.append(np.mean(sample["Status"] == "Lulus"))
-    
+
     sub = sample[sample["Kehadiran (%)"] >= 80]
     if len(sub) > 0:
         boot_p_lulus_given_tinggi.append(np.mean(sub["Status"] == "Lulus"))
@@ -392,7 +416,9 @@ for _ in range(1000):
 ci_lulus = np.percentile(boot_p_lulus, [2.5, 97.5])
 ci_lulus_tinggi = np.percentile(boot_p_lulus_given_tinggi, [2.5, 97.5])
 ```
+
 > **Hasil 95% Confidence Interval:**
+>
 > - $P(\text{Lulus})$: $[45.0\%, 85.0\%]$
 > - $P(\text{Lulus} \mid \text{Kehadiran} \ge 80\%)$: $[100.0\%, 100.0\%]$ (Sangat stabil di $1.00$).
 
@@ -403,7 +429,9 @@ ci_lulus_tinggi = np.percentile(boot_p_lulus_given_tinggi, [2.5, 97.5])
 Notebook menyajikan 3 visualisasi utama yang disajikan secara terpisah untuk kemudahan analisis:
 
 ### 1. Diagram Batang Perbandingan Probabilitas (Bar Chart)
+
 Membandingkan baseline probabilitas kelulusan terhadap dua sub-populasi:
+
 - **Baseline $P(\text{Lulus})$**: $65.0\%$
 - **Kehadiran Tinggi ($\ge 80\%$)**: **$100.0\%$**
 - **Kehadiran Rendah ($< 80\%$)**: **$12.5\%$**
@@ -416,37 +444,41 @@ Probabilitas Kelulusan Berdasarkan Kondisi Kehadiran:
 ```
 
 ### 2. Kurva Analisis Sensitivitas Ambang Batas (Line Chart)
+
 Memetakan dinamika trade-off antara **ketelitian probabilitas kelulusan** vs **jumlah populasi mahasiswa yang terjaring**:
 
-| Ambang Kehadiran | Jumlah Mahasiswa | Jumlah Lulus | $P(\text{Lulus} \mid \text{Kehadiran} \ge T)$ | Status Kelulusan |
-|:---:|:---:|:---:|:---:|:---:|
-| **$\ge 65\%$** | 17 mahasiswa | 13 orang | **$0.7647$** ($76.5\%$) | Belum murni |
-| **$\ge 70\%$** | 15 mahasiswa | 13 orang | **$0.8667$** ($86.7\%$) | Meningkat pesat |
-| **$\ge 75\%$** | 13 mahasiswa | 13 orang | **$1.0000$** ($100.0\%$) | **Titik Jenuh Optimal** |
-| **$\ge 80\%$** | 12 mahasiswa | 12 orang | **$1.0000$** ($100.0\%$) | Standar Akademik |
-| **$\ge 85\%$** | 10 mahasiswa | 10 orang | **$1.0000$** ($100.0\%$) | Sangat selektif |
-| **$\ge 90\%$** | 6 mahasiswa | 6 orang | **$1.0000$** ($100.0\%$) | Populasi menyusut |
+| Ambang Kehadiran | Jumlah Mahasiswa | Jumlah Lulus | $P(\text{Lulus} \mid \text{Kehadiran} \ge T)$ |    Status Kelulusan     |
+| :--------------: | :--------------: | :----------: | :-------------------------------------------: | :---------------------: |
+|  **$\ge 65\%$**  |   17 mahasiswa   |   13 orang   |            **$0.7647$** ($76.5\%$)            |       Belum murni       |
+|  **$\ge 70\%$**  |   15 mahasiswa   |   13 orang   |            **$0.8667$** ($86.7\%$)            |     Meningkat pesat     |
+|  **$\ge 75\%$**  |   13 mahasiswa   |   13 orang   |           **$1.0000$** ($100.0\%$)            | **Titik Jenuh Optimal** |
+|  **$\ge 80\%$**  |   12 mahasiswa   |   12 orang   |           **$1.0000$** ($100.0\%$)            |    Standar Akademik     |
+|  **$\ge 85\%$**  |   10 mahasiswa   |   10 orang   |           **$1.0000$** ($100.0\%$)            |     Sangat selektif     |
+|  **$\ge 90\%$**  |   6 mahasiswa    |   6 orang    |           **$1.0000$** ($100.0\%$)            |    Populasi menyusut    |
 
 > [!TIP]
-> **Insight Batas Ambang:** Titik batas $\ge 75\%$ hingga $\ge 80\%$ merupakan *optimal decision threshold*. Di atas batas ini, model klasifikasi mencapai akurasi presisi $100\%$ tanpa memangkas ukuran sampel secara berlebihan.
+> **Insight Batas Ambang:** Titik batas $\ge 75\%$ hingga $\ge 80\%$ merupakan _optimal decision threshold_. Di atas batas ini, model klasifikasi mencapai akurasi presisi $100\%$ tanpa memangkas ukuran sampel secara berlebihan.
 
 ### 3. Scatter Plot Sebaran Kehadiran vs Nilai Akhir
+
 - Sumbu X: Persentase Kehadiran ($0 - 100\%$).
 - Sumbu Y: Nilai Akhir Mahasiswa ($0 - 100$).
 - Garis Referensi: Garis ambang kehadiran ($80\%$) dan batas kelulusan ($70.0$).
-- **Interpretasi:** Terlihat pola pemisahan linier (*linear separability*) yang sangat bersih. Kuadran kanan atas diduduki seluruhnya oleh titik hijau (**Lulus**), membuktikan fitur kehadiran memiliki *mutual information* yang sangat tinggi terhadap label target.
+- **Interpretasi:** Terlihat pola pemisahan linier (_linear separability_) yang sangat bersih. Kuadran kanan atas diduduki seluruhnya oleh titik hijau (**Lulus**), membuktikan fitur kehadiran memiliki _mutual information_ yang sangat tinggi terhadap label target.
 
 ---
 
 ## 🚀 Cara Menjalankan Proyek
 
 ### 1. Kloning Repositori
+
 ```bash
 git clone https://github.com/G-than12/ML-05-Probabilitas.git
 cd ML-05-Probabilitas
 ```
 
 ### 2. Buat dan Aktifkan Virtual Environment (Disarankan)
+
 ```bash
 # Windows
 python -m venv venv
@@ -458,15 +490,18 @@ source venv/bin/activate
 ```
 
 ### 3. Instalasi Dependensi Pustaka
+
 ```bash
 pip install numpy pandas matplotlib seaborn jupyter
 ```
 
 ### 4. Eksekusi Jupyter Notebook
+
 ```bash
 jupyter notebook 059_GathanHilabi_Pertemuan05.ipynb
 ```
-*Atau buka file `.ipynb` langsung di Visual Studio Code dengan ekstensi Jupyter terpasang.*
+
+_Atau buka file `.ipynb` langsung di Visual Studio Code dengan ekstensi Jupyter terpasang._
 
 ---
 
@@ -482,10 +517,10 @@ ML-05-Probabilitas/
 
 ---
 
-## 💡 Ringkasan Temuan Kunci (*Key Takeaways*)
+## 💡 Ringkasan Temuan Kunci (_Key Takeaways_)
 
 1. **Kehadiran sebagai Prediktor Kuat**: Kehadiran $\ge 80\%$ melipatgandakan kepastian kelulusan mahasiswa dari baseline $65\%$ menjadi $100\%$.
-2. **Kekuatan Teorema Bayes**: Bayes membuktikan bahwa $92.3\%$ mahasiswa yang lulus memiliki catatan kehadiran tinggi, memberikan dasar matematis untuk *early warning system* akademik.
+2. **Kekuatan Teorema Bayes**: Bayes membuktikan bahwa $92.3\%$ mahasiswa yang lulus memiliki catatan kehadiran tinggi, memberikan dasar matematis untuk _early warning system_ akademik.
 3. **Konvergensi LLN**: Simulasi Monte Carlo memvalidasi bahwa hukum bilangan besar menjamin akurasi estimasi model seiring dengan pertambahan volume data latih.
 
 ---
@@ -496,5 +531,5 @@ Proyek ini didistribusikan di bawah lisensi **MIT License** — terbuka untuk ke
 
 <div align="center">
   <sub>Praktikum Pembelajaran Mesin • Pertemuan 05 • 2026</sub><br>
-  <sub>Dibuat oleh: <b>Gathan Hilabi</b> (NIM: 60324059)</sub>
+  <sub>Dibuat oleh: <b>Gathan Hilabi</b> (NIM: 059)</sub>
 </div>
